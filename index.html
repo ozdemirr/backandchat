@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html ng-app="backAndChat">
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/app.css">
+    <script src="vendor/angular.min.js"></script>
+    <script src="vendor/backand.min.js"></script>
+    <script src="vendor/socket.io.js"></script>
+    <script src="app.js"></script>
+    <script src="config/config.js"></script>
+    <!--/Modules/-->
+    <script src="modules/index/index.js"></script>
+    <script src="modules/shared/messageService.js"></script>
+
+    <title>BackAndChat</title>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="row" ng-controller="indexController" ng-init="getMessages()">
+
+
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Chat
+                </div>
+                <div class="panel-body">
+                    <ul class="chat">
+
+                        <li class="left clearfix" ng-repeat="message in messages">
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <strong class="primary-font">{{message.author}}</strong> <small class="pull-right text-muted">
+                                    {{message.time | date:'medium'}}</small>
+                                </div>
+                                <p>
+                                    {{message.text}}
+                                </p>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <div class="input-group  col-md-12">
+                        <input type="text" class="form-control input-sm" placeholder="Type your username, then ready to go" ng-model="author"/>
+                    </div>
+                    <div class="input-group">
+                        <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." ng-model="text"/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-warning btn-sm" id="btn-chat" ng-disabled="!author || !text" ng-click="sendMessage()">Send</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
